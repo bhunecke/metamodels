@@ -25,6 +25,10 @@ shapes:scale-y rdfs:domain shapes:ScaledShape ; rdfs:range xsd:double ;
     rdfs:comment "Positive dimensionless factor along the shape's local Y axis." .
 shapes:scale-z rdfs:domain shapes:ScaledShape ; rdfs:range xsd:double ;
     rdfs:comment "Positive dimensionless factor along the shape's local Z axis." .
+shapes:VisualShape a rdfs:Class ;
+    rdfs:comment "Marks a shape that is drawn: viewers and renderers show it. It says nothing about contact. A shape may also be a CollisionShape; one that states neither role leaves its use to the consumer." .
+shapes:CollisionShape a rdfs:Class ;
+    rdfs:comment "Marks a shape that takes part in contact: collision checkers and physics engines test it. It says nothing about whether the shape is drawn. A shape may also be a VisualShape; one that states neither role leaves its use to the consumer." .
 
 shapes:CenteredPrimitiveShape
     a sh:NodeShape ;
@@ -64,3 +68,14 @@ shapes:ScaledShapeConstraint
     sh:property [ sh:path shapes:scale-x ; sh:minCount 1 ; sh:maxCount 1 ; sh:node shapes:ScaleFactorConstraint ] ;
     sh:property [ sh:path shapes:scale-y ; sh:minCount 1 ; sh:maxCount 1 ; sh:node shapes:ScaleFactorConstraint ] ;
     sh:property [ sh:path shapes:scale-z ; sh:minCount 1 ; sh:maxCount 1 ; sh:node shapes:ScaleFactorConstraint ] .
+
+shapes:ShapeRoleConstraint
+    a sh:NodeShape ;
+    sh:targetClass shapes:VisualShape, shapes:CollisionShape ;
+    sh:description "A role marks a shape, so its node also has a geometric type, which brings the frame and unit constraints." ;
+    sh:or (
+        [ sh:class shapes:UnitCube ]
+        [ sh:class shapes:UnitCylinder ]
+        [ sh:class shapes:UnitSphere ]
+        [ sh:class shapes:FileBasedShape ]
+    ) .
