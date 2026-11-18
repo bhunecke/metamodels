@@ -6,6 +6,7 @@
 
         "Thesis":       { "@id": "thesis:Thesis" },
         "ThesisTopic":  { "@id": "thesis:ThesisTopic" },
+        "ThesisProcessStep": { "@id": "thesis:ThesisProcessStep" },
 
         "name":              { "@id": "thesis:name",              "@type": "xsd:string" },
         "title":             { "@id": "thesis:name",              "@type": "xsd:string" },
@@ -21,6 +22,21 @@
         "valid-through":     { "@id": "thesis:valid-through",     "@type": "xsd:date" },
         "prerequisites":     { "@id": "thesis:prerequisites",     "@type": "xsd:string" },
         "url":               { "@id": "thesis:url",               "@type": "@id" },
+        "position":          { "@id": "thesis:position",          "@type": "xsd:integer" },
+
+        "links": {
+            "@id":        "thesis:links",
+            "@container": "@set",
+            "@context": {
+                "name": {
+                    "@id": "thesis:link-text"
+                },
+                "ref": {
+                    "@id": "thesis:link-url",
+                    "@type": "@id"
+                }
+            }
+        },
 
         "author": { "@id": "thesis:author", "@type": "@id" },
 

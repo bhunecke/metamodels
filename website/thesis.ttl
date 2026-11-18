@@ -165,3 +165,68 @@ sh_sec:ThesisTopicAdvisorShape
         sh:message  "Thesis topic advisor may have a display name." ;
     ] ;
 .
+
+sh_sec:ThesisProcessStepShape
+    a sh:NodeShape ;
+    sh:targetClass thesis:ThesisProcessStep ;
+    sh:closed false ;
+
+    sh:property [
+        sh:path     thesis:name ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:minLength 3 ;
+        sh:severity sh:Violation ;
+        sh:message  "Thesis process step must have a title." ;
+    ] ;
+
+    sh:property [
+        sh:path     thesis:description ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message  "Thesis process step must have a description." ;
+    ] ;
+
+    sh:property [
+        sh:path     thesis:position ;
+        sh:datatype xsd:integer ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:minInclusive 1 ;
+        sh:severity sh:Violation ;
+        sh:message  "Thesis process step must have a position (integer >= 1)." ;
+    ] ;
+
+    sh:property [
+        sh:path     thesis:links ;
+        sh:nodeKind sh:BlankNodeOrIRI ;
+        sh:node     sh_sec:ThesisProcessLinkShape ;
+        sh:severity sh:Violation ;
+        sh:message  "Thesis process step links must be objects with name and ref." ;
+    ] ;
+.
+
+sh_sec:ThesisProcessLinkShape
+    a sh:NodeShape ;
+    sh:closed false ;
+
+    sh:property [
+        sh:path     thesis:link-text ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:minLength 2 ;
+        sh:message  "Thesis process link must have display text." ;
+    ] ;
+
+    sh:property [
+        sh:path     thesis:link-url ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message  "Thesis process link must have a ref." ;
+    ] ;
+.
